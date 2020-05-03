@@ -369,8 +369,8 @@ class Worker(object):
         gracefully.
         """
 
-        signal.signal(signal.SIGINT, self.request_stop)
-        signal.signal(signal.SIGTERM, self.request_stop)
+        #signal.signal(signal.SIGINT, self.request_stop)
+        #signal.signal(signal.SIGTERM, self.request_stop)
 
     def kill_horse(self, sig=SIGKILL):
         """
