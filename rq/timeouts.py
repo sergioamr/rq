@@ -67,12 +67,14 @@ class UnixSignalDeathPenalty(BaseDeathPenalty):
         """Sets up an alarm signal and a signal handler that raises
         an exception after the timeout amount (expressed in seconds).
         """
-        signal.signal(signal.SIGALRM, self.handle_death_penalty)
-        signal.alarm(self._timeout)
+        #signal.signal(signal.SIGALRM, self.handle_death_penalty)
+        #signal.alarm(self._timeout)
+        pass
 
     def cancel_death_penalty(self):
         """Removes the death penalty alarm and puts back the system into
         default signal handling.
         """
-        signal.alarm(0)
-        signal.signal(signal.SIGALRM, signal.SIG_DFL)
+        #signal.alarm(0)
+        #signal.signal(signal.SIGALRM, signal.SIG_DFL)
+        pass
