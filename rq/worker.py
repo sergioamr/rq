@@ -672,6 +672,7 @@ class Worker(object):
         """Spawns a work horse to perform the actual work and passes it a job.
         """
         child_pid = os.fork()
+        # child_pid = 0
         os.environ['RQ_WORKER_ID'] = self.name
         os.environ['RQ_JOB_ID'] = job.id
         if child_pid == 0:
@@ -892,7 +893,12 @@ class Worker(object):
             job.started_at = utcnow()
             timeout = job.timeout or self.queue_class.DEFAULT_TIMEOUT
             with self.death_penalty_class(timeout, JobTimeoutException, job_id=job.id):
-                rv = job.perform_shit()
+                rv = job.perform()
+
+                self.log.info("TEST ")
+                print (job.perform)
+                #test = job.perform()
+                #self.log.info("TEST " + test)
 
             job.ended_at = utcnow()
 

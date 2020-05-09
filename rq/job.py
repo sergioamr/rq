@@ -630,8 +630,7 @@ class Job(object):
                 pass
         connection.delete(self.dependents_key)
 
-    # Job execution
-    def perform_shit(self):  # noqa
+    def perform(self):  # noqa
         """Invokes the job function with the job arguments."""
         self.connection.persist(self.key)
         _job_stack.push(self)
