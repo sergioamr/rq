@@ -641,6 +641,18 @@ class Job(object):
             assert self is _job_stack.pop()
         return self._result
 
+    def my_perform(self):  # noqa
+        """Invokes the job function with the job arguments."""
+        self.connection.persist(self.key)
+        _job_stack.push(self)
+        try:
+            self._result = self._execute()
+        except Exception as e:
+            print(" CRASHED " + str(e))
+        finally:
+            assert self is _job_stack.pop()
+        return self._result
+
     def _execute(self):
         return self.func(*self.args, **self.kwargs)
 
