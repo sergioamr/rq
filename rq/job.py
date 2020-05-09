@@ -631,24 +631,12 @@ class Job(object):
         connection.delete(self.dependents_key)
 
     # Job execution
-    def perform(self):  # noqa
+    def perform_shit(self):  # noqa
         """Invokes the job function with the job arguments."""
         self.connection.persist(self.key)
         _job_stack.push(self)
         try:
             self._result = self._execute()
-        finally:
-            assert self is _job_stack.pop()
-        return self._result
-
-    def my_perform(self):  # noqa
-        """Invokes the job function with the job arguments."""
-        self.connection.persist(self.key)
-        _job_stack.push(self)
-        try:
-            self._result = self._execute()
-        except Exception as e:
-            print(" CRASHED " + str(e))
         finally:
             assert self is _job_stack.pop()
         return self._result
